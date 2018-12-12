@@ -1,0 +1,5 @@
+*.json
+*.xml
+__pycache__/
+FileTest.txt
+File\ Read\ Test.py
