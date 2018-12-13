@@ -37,6 +37,7 @@ def SplitAbilities(Tag, MonsterText):
             AbilityList.append([])
             AbilityList[-1].append(Ability[Ability.index("<name>")+6:Ability.index("</name>")])
             AbilityList[-1].append("")
+            Ability = "\n".join(Ability.split("<text />"))
             while True:
                 AbilityList[-1][1] += Ability[Ability.index("<text>")+6:Ability.index("</text>")]
                 Ability = Ability[(Ability.index("</text>")+7):]
@@ -85,6 +86,6 @@ while True:
         while re.search('</monster>', XMLLine) == None:
             XMLLine = XML.readline()
             MonsterText += XMLLine
-        print(DealWithMonster(MonsterText))
+        MonsterList.append(DealWithMonster(MonsterText))
     elif XMLLine == '':
         break
