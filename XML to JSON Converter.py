@@ -89,3 +89,20 @@ while True:
         MonsterList.append(DealWithMonster(MonsterText))
     elif XMLLine == '':
         break
+XML.close()
+JSON = open(".\\myMonsters.json","w+")
+JSON.writelines("[\n")
+for Monster in MonsterList:
+        JSON.writelines("   {\n")
+        JSON.writelines("       \"AC\":{\n")
+        JSON.writelines("           \"Notes\":\""++"\",\n") #TODO
+        JSON.writelines("           \"Value\":\""++"\",\n") #TODO
+        JSON.writelines("       },\n")
+        JSON.writelines("       \"Abilities\":{\n")
+        JSON.writelines("           \"Str\":\"%s\",\n"%(Monster[8]))
+        JSON.writelines("           \"Dex\":\"%s\",\n"%(Monster[9]))
+        JSON.writelines("           \"Con\":\"%s\",\n"%(Monster[10]))
+        JSON.writelines("           \"Int\":\"%s\",\n"%(Monster[11]))
+        JSON.writelines("           \"Wis\":\"%s\",\n"%(Monster[12]))
+        JSON.writelines("           \"Cha\":\"%s\",\n"%(Monster[13]))
+        JSON.writelines("       },\n")
