@@ -22,6 +22,18 @@ def MonsterElementalAffinities(Tag, MonsterText):
         MonsterAffinityList.append(MonsterAffinities2.group(2))
     return MonsterAffinityList
 
+def SplitAbilities(Tag, MonsterText):
+    AbilityList = []
+    MonsterText = "".join(MonsterText.split("\n"))
+    MonsterText = "".join(MonsterText.split("\t"))
+    TempList = MonsterText.split("<"+Tag+">")
+    for element in TempList:
+        try:
+            AbilityList.append(element[:element.index("</"+Tag+">")])
+        except ValueError:
+            pass
+    return AbilityList
+
 def DealWithMonster(MonsterText):
     CreatureAttributes = []
     CreatureAttributes.append(XMLRead("name", MonsterText)) #name
@@ -46,6 +58,11 @@ def DealWithMonster(MonsterText):
     CreatureAttributes.append(XMLRead("senses", MonsterText).split(', '))
     CreatureAttributes.append(XMLRead("languages", MonsterText).split(', '))
     CreatureAttributes.append(XMLRead("cr", MonsterText))
+
+    CreatureAttributes.append(SplitAbilities("action", MonsterText))
+    CreatureAttributes.append(SplitAbilities("trait", MonsterText))
+    CreatureAttributes.append(SplitAbilities("reaction", MonsterText))
+    CreatureAttributes.append(SplitAbilities("legendary", MonsterText))
     return CreatureAttributes
 
 XML = open(".\\Tome of Beasts.xml")
